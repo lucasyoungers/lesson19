@@ -37,11 +37,12 @@ new Vue({
             this.y = this.canvas.height - 30;
             this.paddleX = (this.canvas.width - this.paddleWidth) / 2;
             this.bricks = this.buildBricksArray(this.brickColumnCount, this.brickRowCount);
-            this.interval = setInterval(this.draw, 10)
+            // this.interval = setInterval(this.draw, 10)
         },
         bindEvents() {
             document.addEventListener("keydown", this.keyDownHandler, false);
             document.addEventListener("keyup", this.keyUpHandler, false);
+            document.addEventListener("mousemove", this.mouseMoveHandler, false);
         },
         keyDownHandler(e) {
             if (e.key == "Right" || e.key == "ArrowRight") {
@@ -55,6 +56,12 @@ new Vue({
                 this.rightPressed = false;
             } else if (e.key == "Left" || e.key == "ArrowLeft") {
                 this.leftPressed = false;
+            }
+        },
+        mouseMoveHandler(e) {
+            let relativeX = e.clientX - this.canvas.brickOffsetLeft;
+            if (relativeX > 0 && relativeX < this.canvas.width) {
+                paddleX = relativeX - this.paddleWidth / 2;
             }
         },
         collisionDetection() {
