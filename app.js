@@ -37,7 +37,7 @@ new Vue({
             this.y = this.canvas.height - 30;
             this.paddleX = (this.canvas.width - this.paddleWidth) / 2;
             this.bricks = this.buildBricksArray(this.brickColumnCount, this.brickRowCount);
-            // this.interval = setInterval(this.draw, 10)
+            this.interval = setInterval(this.draw, 10)
         },
         bindEvents() {
             document.addEventListener("keydown", this.keyDownHandler, false);
